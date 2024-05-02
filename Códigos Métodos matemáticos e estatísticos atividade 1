@@ -1,0 +1,30 @@
+(*Questão 1*)
+f[x_, y_] := Exp[-(x^2 + y^2)]
+Plot3D[f[x, y], {x, -3, +3}, {y, -3, +3}, PlotRange -> {0, 1}]
+
+(*Questão 2*)
+dx = 0.01;
+dy = 0.01;
+
+x = Table[i, {i, -3, 3, dx}];
+y = Table[j, {j, -3, 3, dy}];
+Nx = Length[x] - 1;
+Ny = Length[y] - 1;
+
+integral = 
+ Sum[((f[x[[i]], y[[j]]] + f[x[[i]], y[[j + 1]]] + 
+       f[x[[i + 1]], y[[j]]] + f[x[[i + 1]], y[[j + 1]]])/4)*dx*
+   dy, {i, 1, Nx}, {j, 1, Ny}]
+
+(*Questão 3*)
+dxValores = {0.5, 0.25, 0.1, 0.05, 0.025, 0.01};
+integrais = 
+  Table[Module[{x, y, Nx, Ny}, x = Table[i, {i, -3, 3, dx}];
+    y = Table[j, {j, -3, 3, dy}];
+    Nx = Length[x] - 1;
+    Ny = Length[y] - 1;
+    Sum[((f[x[[i]], y[[j]]] + f[x[[i]], y[[j + 1]]] + 
+          f[x[[i + 1]], y[[j]]] + f[x[[i + 1]], y[[j + 1]]])/4)*dx*
+      dy, {i, 1, Nx}, {j, 1, Ny}]], {dx, dxValores}];
+
+integrais
